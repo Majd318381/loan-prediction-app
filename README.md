@@ -40,12 +40,10 @@ To address the project requirements, we have:
 ## Backend Services
 The Flask backend provides the following REST API endpoints:
 
-- **POST `/loans`**: Submit a new loan application.
+- **POST `/loans`**: Submit a new loan application ___and predict the status___.
 - **GET `/loans`**: Retrieve all loan applications.
 - **GET `/loan/<loan_id>`**: Get details of a specific loan application by its Loan_ID.
 - **DELETE `/loan/<loan_id>`**: Delete a specific loan application by its Loan_ID.
-- **PUT `/loan/<loan_id>/approve`**: Mark a specific loan application as approved.
-- **PUT `/loan/<loan_id>/reject`**: Mark a specific loan application as rejected.
 
 All endpoints return JSON responses for seamless frontend integration.
 
@@ -77,8 +75,6 @@ pip install -r requirements.txt
 ```
 
 ## TODO
-- Integrate model inference: Automatically invoke the trained model when a new loan application is submitted to predict the loan status and update the database accordingly.
-___I guess no need for manual approve/reject___
 - Add an Exploratory Data Analysis (EDA) page: Create a dedicated page in the application to display EDA visualizations and insights.
 - Add a Model Accuracy page: Provide a page that presents model evaluation metrics such as recall, precision, F1 score, and accuracy.
 

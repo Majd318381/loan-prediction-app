@@ -109,28 +109,6 @@ def get_loan(loan_id):
             return jsonify({'error': 'Loan not found'}), 404
         return jsonify(dict(loan))
 
-# Update (Approve loan by ID)
-@app.route('/loans/<int:loan_id>/approve', methods=['PUT'])
-def approve_loan(loan_id):
-    with get_db_connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute('UPDATE loans SET status = 1 WHERE loan_id = ?', (loan_id,))
-        conn.commit()
-        if cursor.rowcount == 0:
-            return jsonify({'error': 'Loan not found'}), 404
-    return jsonify({'message': 'Loan approved'})
-
-# Update (Reject loan by ID)
-@app.route('/loans/<int:loan_id>/reject', methods=['PUT'])
-def reject_loan(loan_id):
-    with get_db_connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute('UPDATE loans SET status = 0 WHERE loan_id = ?', (loan_id,))
-        conn.commit()
-        if cursor.rowcount == 0:
-            return jsonify({'error': 'Loan not found'}), 404
-    return jsonify({'message': 'Loan rejected'})
-
 # Delete (Remove loan by ID)
 @app.route('/loans/<int:loan_id>', methods=['DELETE'])
 def delete_loan(loan_id):
