@@ -51,6 +51,18 @@ All endpoints return JSON responses for seamless frontend integration.
 - **index.html**: Displays a list of all loan applications stored in the database.
 - **create.html**: Provides a form for submitting a new loan application.
 
+## Model Training
+- Reads the loan prediction dataset from a CSV file.
+- Drops the Loan_ID column.
+- Fills missing values in all columns using the most frequent value.
+- Encodes categorical columns into numeric values using LabelEncoder and saves the encoders for future use.
+- Separates the features (X) from the target variable (y, which is Loan_Status).
+- Splits the data into training and testing sets.
+- Tries logistic regression (commented out due to convergence issues).
+- Trains a RandomForestClassifier on the training data.
+- Predicts on the test set and prints accuracy, precision, recall, and F1 score.
+- Saves the trained model and the encoders to disk for later use.
+
 ## Hosting
 We will use www.pythonanywhere.com free account
 
