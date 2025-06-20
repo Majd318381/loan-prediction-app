@@ -3,11 +3,11 @@ This project is a homework assignment for the *Machine Learning Techniques (MLT)
 **Submission deadline:** Sunday, 22 June 2025, 11:59 PM.
 
 ## Requirements
-1-	Build a web application to help banks approve/reject individual requests.
-2-	Add/remove a request and its output. 
-3-	The web application should *contain* Exploratory Data Analysis over all requests
-4-	Solving the *data* issues should be in the report/additional page in the website
-5-	A page for model accuracy (recall, precision, F1, and accuracy)
+1.	Build a web application to help banks approve/reject individual requests.
+2.	Add/remove a request and its output. 
+3.	The web application should ___contain___ Exploratory Data Analysis over all requests
+4.	Solving the ___data___ issues should be in the report/additional page in the website
+5.	A page for model accuracy (recall, precision, F1, and accuracy)
 
 ## Dataset Description
 
@@ -55,7 +55,7 @@ All endpoints return JSON responses for seamless frontend integration.
 
 ## TODO
 - Integrate model inference: Automatically invoke the trained model when a new loan application is submitted to predict the loan status and update the database accordingly.
-*I guess no need for manual approve/reject*
+___I guess no need for manual approve/reject___
 - Add an Exploratory Data Analysis (EDA) page: Create a dedicated page in the application to display EDA visualizations and insights.
 - Add a Model Accuracy page: Provide a page that presents model evaluation metrics such as recall, precision, F1 score, and accuracy.
 
@@ -74,4 +74,5 @@ All endpoints return JSON responses for seamless frontend integration.
 
 ## Date Issue:
 No Date or Time fields found in dataset. No handling needed.
-*I guess it was a typo, he meant to say data issues not date.
+
+___I guess it was a typo, he meant to say data issues not date.___
