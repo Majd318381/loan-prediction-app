@@ -1,8 +1,14 @@
 from flask import Flask, request, jsonify, render_template
 import sqlite3
+import joblib
+import numpy as np
 
 app = Flask(__name__)
 DB_FILE = 'loan_data.db'
+
+# Load the saved model
+model = joblib.load('Model_Training/loan_model.pkl')
+encoders = joblib.load('Model_Training/encoders.pkl')
 
 def get_db_connection():
     conn = sqlite3.connect(DB_FILE)
@@ -21,14 +27,54 @@ def create():
 @app.route('/loans', methods=['POST'])
 def add_loan():
     data = request.json
+    print("Received data:", data)
+
+    # Convert categorical features to the format expected by the model if needed
+    encoded_data = {}
+    for column, le in encoders.items():
+        column = column.lower()
+        if column == 'loan_status':
+            continue
+        print(f"Column: {column}, Before encoding: {data.get(column)}")
+        encoded_value = le.transform([data.get(column)])[0]
+        print(f"Column: {column}, After encoding: {encoded_value}")
+        encoded_data[column] = encoded_value
+    
+    # Prepare input features for prediction
+
+    features = [
+        encoded_data.get('gender'),
+        encoded_data.get('married'),
+        encoded_data.get('dependents'),
+        encoded_data.get('education'),
+        encoded_data.get('self_employed'),
+        data.get('applicant_income'),
+        data.get('coapplicant_income'),
+        data.get('loan_amount'),
+        data.get('loan_amount_term'),
+        data.get('credit_history'),
+        encoded_data.get('property_area')
+    ]
+
+    # Convert features to numpy array and reshape for prediction
+    input_array = np.array(features).reshape(1, -1)
+
+    # Predict the loan status
+    predicted_status = int(model.predict(input_array)[0])
+
+    # Decode the predicted_status using the loan_status encoder
+    loan_status_label = encoders['Loan_Status'].inverse_transform([predicted_status])[0]
+    data['loan_status'] = loan_status_label
+
+    # Save the loan data to the database
     with get_db_connection() as conn:
         cursor = conn.cursor()
         cursor.execute('''
             INSERT INTO loans (
-                gender, married, dependents, education, self_employed,
-                applicant_income, coapplicant_income, loan_amount,
-                loan_amount_term, credit_history, property_area
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            gender, married, dependents, education, self_employed,
+            applicant_income, coapplicant_income, loan_amount,
+            loan_amount_term, credit_history, property_area, loan_status
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             data.get('gender'),
             data.get('married'),
@@ -40,7 +86,8 @@ def add_loan():
             data.get('loan_amount'),
             data.get('loan_amount_term'),
             data.get('credit_history'),
-            data.get('property_area')
+            data.get('property_area'),
+            data.get('loan_status')
         ))
         conn.commit()
         loan_id = cursor.lastrowid
@@ -94,6 +141,8 @@ def delete_loan(loan_id):
         if cursor.rowcount == 0:
             return jsonify({'error': 'Loan not found'}), 404
     return jsonify({'message': 'Loan deleted'})
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
