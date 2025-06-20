@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">All Loans</h2>
+    <a href="/create" class="btn btn-primary mb-3">Create New Loan Application</a>
+    <table class="table table-bordered table-striped" id="loans-table">
+        <thead class="thead-dark">
+            <tr>
+                <th>Loan ID</th>
+                <th>Gender</th>
+                <th>Married</th>
+                <th>Dependents</th>
+                <th>Education</th>
+                <th>Self Employed</th>
+                <th>Applicant Income</th>
+                <th>Co-Applicant Income</th>
+                <th>Loan Amount</th>
+                <th>Loan Amount Term</th>
+                <th>Credit History</th>
+                <th>Property Area</th>
+                <th>Loan Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted here by jQuery -->
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(document).ready(function(){
+    $.getJSON("/loans", function(data){
+        var rows = '';
+        $.each(data, function(i, loan){
+            rows += '<tr>'
+                + '<td>' + loan.loan_id + '</td>'
+                + '<td>' + (loan.gender || '') + '</td>'
+                + '<td>' + (loan.married || '') + '</td>'
+                + '<td>' + (loan.dependents || '') + '</td>'
+                + '<td>' + (loan.education || '') + '</td>'
+                + '<td>' + (loan.self_employed || '') + '</td>'
+                + '<td>' + (loan.applicant_income || '') + '</td>'
+                + '<td>' + (loan.coapplicant_income || '') + '</td>'
+                + '<td>' + (loan.loan_amount || '') + '</td>'
+                + '<td>' + (loan.loan_amount_term || '') + '</td>'
+                + '<td>' + (loan.credit_history || '') + '</td>'
+                + '<td>' + (loan.property_area || '') + '</td>'
+                + '<td>' + (loan.loan_status || '') + '</td>'
+                + '</tr>';
+        });
+        $('#loans-table tbody').html(rows);
+    });
+});
+</script>
+</body>
+</html>
