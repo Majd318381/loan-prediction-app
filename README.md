@@ -53,6 +53,20 @@ All endpoints return JSON responses for seamless frontend integration.
 - **index.html**: Displays a list of all loan applications stored in the database.
 - **create.html**: Provides a form for submitting a new loan application.
 
+## Hosting
+We will use www.pythonanywhere.com free account
+
+create a new web app
+select web framework Flask
+select python version 3.10
+Update WSGI configuration 
+
+After creating the account we will setup the venv on bash terminal and install the libraries.
+  mkvirtualenv venv --python=python3.10
+  pip install flask
+
+https://yusuf233336.pythonanywhere.com/
+
 ## TODO
 - Integrate model inference: Automatically invoke the trained model when a new loan application is submitted to predict the loan status and update the database accordingly.
 ___I guess no need for manual approve/reject___
