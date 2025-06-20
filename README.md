@@ -67,6 +67,15 @@ After creating the account we will setup the venv on bash terminal and install t
 
 https://yusuf233336.pythonanywhere.com/
 
+## Dependencies
+
+All required Python libraries for this project are listed in `requirements.txt`.  
+To install them, run:
+
+```bash
+pip install -r requirements.txt
+```
+
 ## TODO
 - Integrate model inference: Automatically invoke the trained model when a new loan application is submitted to predict the loan status and update the database accordingly.
 ___I guess no need for manual approve/reject___
