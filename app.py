@@ -19,6 +19,18 @@ def get_db_connection():
 def home():
     return render_template('index.html')
 
+@app.route('/data-issues')
+def data_issues():
+    return render_template('data-issues.html')
+
+@app.route('/expolety')
+def expolety():
+    return render_template('expolety.html')
+
+@app.route('/accuracy')
+def accuracy():
+    return render_template('accuracy.html')
+
 @app.route('/create')
 def create():
     return render_template('create.html')
