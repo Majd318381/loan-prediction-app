@@ -5,13 +5,31 @@
     <title>Loan List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
+<body>    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Loan Prediction App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Loan List</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/create">Create Application <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profiling-report">Profiling Report</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 <div class="container-fluid mt-5 px-5">
     <div class="d-flex justify-content-between mb-5">
         <h2 class="mb-4">All Loans Applications</h2>
         <a href="/create" class="btn btn-primary mb-3">Add New Loan Application</a>
     </div>
-    
     <table class="table table-bordered table-striped" id="loans-table">
         <thead class="thead-dark">
             <tr>
@@ -46,9 +64,9 @@ $(document).ready(function(){
         } else {
             $.each(data, function(i, loan){
                 var loanStatusBadge = '';
-                if (loan.loan_status === 'Accepted') {
+                if (loan.loan_status === 'Y') {
                     loanStatusBadge = '<span class="badge badge-success">Accepted</span>';
-                } else if (loan.loan_status === 'Rejected') {
+                } else if (loan.loan_status === 'N') {
                     loanStatusBadge = '<span class="badge badge-danger">Rejected</span>';
                 } else {
                     loanStatusBadge = '<span class="badge badge-secondary">N/A</span>';

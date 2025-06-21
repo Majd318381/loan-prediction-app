@@ -1,4 +1,6 @@
 flask
 pandas
 scikit-learn
-
+matplotlib
+seaborn
+ydata_profiling
