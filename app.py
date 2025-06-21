@@ -23,9 +23,9 @@ def home():
 def data_issues():
     return render_template('data-issues.html')
 
-@app.route('/expolety')
+@app.route('/eda')
 def expolety():
-    return render_template('expolety.html')
+    return render_template('eda.html')
 
 @app.route('/accuracy')
 def accuracy():
