@@ -23,6 +23,14 @@ def home():
 def create():
     return render_template('create.html')
 
+@app.route('/loan-details/<int:loan_id>')
+def details(loan_id):
+    with get_db_connection() as conn:
+        loan = conn.execute('SELECT * FROM loans WHERE loan_id = ?', (loan_id,)).fetchone()
+        if loan is None:
+            return "Loan not found", 404
+        return render_template('loan-details.html', loan=loan)
+
 @app.route('/profiling-report')
 def profiling_report():
     try:

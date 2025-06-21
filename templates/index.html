@@ -7,20 +7,25 @@
 </head>
 <body>    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Loan Prediction App</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="container-fluid px-5">
+            <a class="navbar-brand" href="#">Loans Applications Wenb App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Loan List</a>
-                </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/create">Create Application <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Loans List</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/profiling-report">Profiling Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Exploratory Data Analysis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Accuracy</a>
                 </li>
             </ul>
         </div>
@@ -46,6 +51,7 @@
                 <th>Credit History</th>
                 <th>Property Area</th>
                 <th>Loan Status</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -85,6 +91,10 @@ $(document).ready(function(){
                     + '<td>' + (loan.credit_history != null ? loan.credit_history : 'N/A') + '</td>'
                     + '<td>' + (loan.property_area || 'N/A') + '</td>'
                     + '<td>' + loanStatusBadge + '</td>'
+                    + '<td>'
+                        + '<a href="/loan-details/' + loan.loan_id + '" class="btn btn-info btn-sm mr-2">View Details</a>'
+                        + '<button class="btn btn-sm btn-danger" onclick="deleteLoan(' + loan.loan_id + ')">Delete</button>'
+                    + '</td>'
                     + '</tr>';
             });
         }
@@ -93,6 +103,25 @@ $(document).ready(function(){
         $('#loans-table tbody').html('<tr><td colspan="13" class="text-danger text-center">Failed to load loan data.</td></tr>');
     });
 });
+function deleteLoan(id) {
+    if (confirm('Are you sure you want to delete this loan application?')) {
+        $.ajax({
+            url: '/loans/' + id,
+            type: 'DELETE',
+            success: function () {
+                alert('Loan deleted successfully.');
+                location.reload();
+            },
+            error: function (xhr) {
+                if (xhr.status === 404) {
+                    alert('Loan not found.');
+                } else {
+                    alert('Failed to delete loan.');
+                }
+            }
+        });
+    }
+}
 </script>
 </body>
 </html>
