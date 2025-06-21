@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   
+
+    <title>Data Issues</title>
+</head>
+<body>
+    <!--Header section-->
+    <header>
+       <nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
+        <a class="navbar-brand" href="./index.html">Loan Prediction App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="./index.html">Loan List</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="./create.html">Create Application <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profiling-report">Profiling Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./expolety.html">Exploerty Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./Dataissue.html">Data Issues</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./accuracy.html">Accuracy</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    </header>
+     <section class="menu-section1" >
+            <h2 class="section-title">Data Issues</h2>
+            <div class="section-content">
+
+                <ul class="menu-list">
+                     <li class="menu-item">
+                         <div class="menu-details">
+                            <h3 class="name">1- Null value</h3>
+                            <p class="text">We solve this proplem by replacing Null value or missing value 
+                                by put a real value In categorical columns, we can fill in missing values with the mode of each column.
+                                and We can fill in the missing values of the loan amount column with the median value.
+                            </p>
+                            </div>
+                        <img src="./img/loan.png" alt="not found" class="menu-img">
+                       
+                     </li>
+                    <li class="menu-item">
+                        <div class="menu-details">
+                            <h3 class="name">After solving  </h3>
+                            <p class="text">We see no null value in any column in dataset </p>
+                            </div>
+                        <img src="./img/heatmapafter.png" alt="not found" class="menu-img">
+                        
+                     </li>
+                     <hr style="width:100%;">
+                       <li class="menu-item">
+                        <div class="menu-details">
+                            <h3 class="name">2- Outliers  </h3>
+                            <p class="text">Outliers in a dataset are data points that significantly deviate from the majority of the other values.
+                                 They can be either unusually high or unusually low compared to the rest of the data
+                                 </p>
+                             
+                        </div>
+                        <img src="./img/outliers.png" alt="not found" class="menu-img">
+
+                        
+                     </li>
+                      <li class="menu-item">
+                        <div class="menu-details">
+                            <h3 class="name">After Solving </h3>
+                            <p class="text">We was used The interquartile (IQR) method of outlier detection uses 1.5 as its
+                                 scale to detect outliers because it most closely follows Gaussian distribution. As a result,
+                                  the method dictates that any data point that's 
+                                1.5 points below the lower bound quartile or above the upper bound quartile is an outlier 
+                                 </p>
+                            
+                        </div>
+                        <img src="./img/outliersafter.png" alt="not found" class="menu-img">
+
+                        
+                     </li>
+                     <hr style="width: 100%;" />
+                     <li class="menu-item">
+                        <div class="menu-details">
+                            <h3 class="name">3- Standardization transforms of data </h3>
+                            <p class="text">We was used The StandardScaler model to removes the mean and scales the data to unit variance.
+                                 The scaling shrinks the range of the feature values as shown in the left figure below. However, the outliers have 
+                                an influence when computing the empirical mean and standard deviation</p>
+                        </div>
+                        <img src="./img/Scatter Plot.png" alt="not found" class="menu-img">
+
+                        
+                     </li>
+                      <li class="menu-item">
+                        <div class="menu-details">
+                            <h3 class="name">After Solving </h3>
+                            
+                        </div>
+                        <img src="./img/scatterafter.png" alt="not found" class="menu-img">
+
+                        
+                     </li>
+                     <hr style="width: 100%; " />
+                     <li class="menu-item">
+                         <div class="menu-details">
+                            <h3 class="name">4- The Strange Data  </h3>
+                            <p class="text">We found  a strange data like +3 in  Dependents so we use <span style="color: yellow;">LabelEncode model</span> for processing this 
+                                  and we convert categorical column into numerical
+                                 ones by using the model </p>
+                        </div>
+
+                     </li>
+                    
+                     
+
+
+                    
+                </ul>
+            </div>
+        </section>
+       
+         <script src="../js/index.js"></script>
+         <!--Testionials-->
+</body>
+</html>
