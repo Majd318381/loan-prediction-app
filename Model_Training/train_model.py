@@ -70,9 +70,9 @@ data[numerical_cols] = scaler.transform(data[numerical_cols])
 
 # Convert categorical Columns into numerical ones
 encoders = {}
-le = LabelEncoder()
 col_to_encode = ['Gender','Dependents', 'Married', 'Education', 'Self_Employed', 'Property_Area','Loan_Status']
 for i in col_to_encode:
+    le = LabelEncoder()
     data[i] = le.fit_transform(data[i])
     encoders[i] = le
 
