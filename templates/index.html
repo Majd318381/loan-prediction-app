@@ -5,7 +5,7 @@
     <title>Loan List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
+<body>    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/">Loan Prediction App</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,9 +25,11 @@
             </ul>
         </div>
     </nav>
-<div class="container mt-5">
-    <h2 class="mb-4">All Loans</h2>
-    <a href="/create" class="btn btn-primary mb-3">Create New Loan Application</a>
+<div class="container-fluid mt-5 px-5">
+    <div class="d-flex justify-content-between mb-5">
+        <h2 class="mb-4">All Loans Applications</h2>
+        <a href="/create" class="btn btn-primary mb-3">Add New Loan Application</a>
+    </div>
     <table class="table table-bordered table-striped" id="loans-table">
         <thead class="thead-dark">
             <tr>
@@ -57,24 +59,38 @@
 $(document).ready(function(){
     $.getJSON("/loans", function(data){
         var rows = '';
-        $.each(data, function(i, loan){
-            rows += '<tr>'
-                + '<td>' + loan.loan_id + '</td>'
-                + '<td>' + (loan.gender || '') + '</td>'
-                + '<td>' + (loan.married || '') + '</td>'
-                + '<td>' + (loan.dependents || '') + '</td>'
-                + '<td>' + (loan.education || '') + '</td>'
-                + '<td>' + (loan.self_employed || '') + '</td>'
-                + '<td>' + (loan.applicant_income || '') + '</td>'
-                + '<td>' + (loan.coapplicant_income || '') + '</td>'
-                + '<td>' + (loan.loan_amount || '') + '</td>'
-                + '<td>' + (loan.loan_amount_term || '') + '</td>'
-                + '<td>' + (loan.credit_history || '') + '</td>'
-                + '<td>' + (loan.property_area || '') + '</td>'
-                + '<td>' + (loan.loan_status || '') + '</td>'
-                + '</tr>';
-        });
+        if (data.length === 0) {
+            rows = '<tr><td colspan="13" class="text-center text-muted">No loan applications found.</td></tr>';
+        } else {
+            $.each(data, function(i, loan){
+                var loanStatusBadge = '';
+                if (loan.loan_status === 'Y') {
+                    loanStatusBadge = '<span class="badge badge-success">Accepted</span>';
+                } else if (loan.loan_status === 'N') {
+                    loanStatusBadge = '<span class="badge badge-danger">Rejected</span>';
+                } else {
+                    loanStatusBadge = '<span class="badge badge-secondary">N/A</span>';
+                }
+                rows += '<tr>'
+                    + '<td>' + (loan.loan_id || 'N/A') + '</td>'
+                    + '<td>' + (loan.gender || 'N/A') + '</td>'
+                    + '<td>' + (loan.married || 'N/A') + '</td>'
+                    + '<td>' + (loan.dependents || 'N/A') + '</td>'
+                    + '<td>' + (loan.education || 'N/A') + '</td>'
+                    + '<td>' + (loan.self_employed || 'N/A') + '</td>'
+                    + '<td>' + (loan.applicant_income || 'N/A') + '</td>'
+                    + '<td>' + (loan.coapplicant_income || 'N/A') + '</td>'
+                    + '<td>' + (loan.loan_amount || 'N/A') + '</td>'
+                    + '<td>' + (loan.loan_amount_term || 'N/A') + '</td>'
+                    + '<td>' + (loan.credit_history != null ? loan.credit_history : 'N/A') + '</td>'
+                    + '<td>' + (loan.property_area || 'N/A') + '</td>'
+                    + '<td>' + loanStatusBadge + '</td>'
+                    + '</tr>';
+            });
+        }
         $('#loans-table tbody').html(rows);
+    }).fail(function() {
+        $('#loans-table tbody').html('<tr><td colspan="13" class="text-danger text-center">Failed to load loan data.</td></tr>');
     });
 });
 </script>
