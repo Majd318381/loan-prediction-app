@@ -45,7 +45,7 @@ def profiling_report():
 def add_loan():
     data = request.json
     print("Received data:", data)
-
+    
     # Convert categorical features to the format expected by the model if needed
     encoded_data = {}
     for column, le in encoders.items():
@@ -72,16 +72,26 @@ def add_loan():
         data.get('credit_history'),
         encoded_data.get('property_area')
     ]
+    # Ensure all features are integers
+    features = [int(x) for x in features]
+    print("Features for prediction:", features)
 
-    # Convert features to numpy array and reshape for prediction
+    # Convert features to numpy array and reshape for prediction, prediction expects 2D array
     input_array = np.array(features).reshape(1, -1)
+    print("Input array for prediction:", input_array)
 
     # Predict the loan status
-    predicted_status = int(model.predict(input_array)[0])
+    predicted_status =  model.predict(input_array)
+
+    
+    
+    # predicted_status = int([0])
+    print("Predicted status (encoded):", predicted_status)
 
     # Decode the predicted_status using the loan_status encoder
     loan_status_label = encoders['Loan_Status'].inverse_transform([predicted_status])[0]
     data['loan_status'] = loan_status_label
+    print("Predicted loan status (decoded):", loan_status_label)
 
     # Save the loan data to the database
     with get_db_connection() as conn:
