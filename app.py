@@ -23,6 +23,15 @@ def home():
 def create():
     return render_template('create.html')
 
+@app.route('/profiling-report')
+def profiling_report():
+    try:
+        with open('EDA/profiling_report.html', 'r', encoding='utf-8') as f:
+            report_html = f.read()
+        return report_html
+    except FileNotFoundError:
+        return "Profiling report not found.", 404
+    
 # Create (Add new loan)
 @app.route('/loans', methods=['POST'])
 def add_loan():

@@ -86,14 +86,10 @@ To install them, run:
 pip install -r requirements.txt
 ```
 
-## TODO
-- Add an Exploratory Data Analysis (EDA) page: Create a dedicated page in the application to display EDA visualizations and insights.
-- Add a Model Accuracy page: Provide a page that presents model evaluation metrics such as recall, precision, F1 score, and accuracy.
-
-
-## EDA:
-- Location: EDA/eda.py
-- Generates:
+## Exploratory Data Analysis (EDA):
+- We used ydata-prfiling library to generate a complete data profiling report.
+- You can reach the report from the top menu in the app.
+- EDA/eda.py contains the script to generate the report and some additional charts:
   - Loan Status Distribution
   - Applicant Income Distribution
   - Correlation Heatmap
@@ -107,3 +103,7 @@ pip install -r requirements.txt
 No Date or Time fields found in dataset. No handling needed.
 
 ___I guess it was a typo, he meant to say data issues not date.___
+
+## TODO
+- review the model training and data preprocessing
+- Add a Model Accuracy page: Provide a page that presents model evaluation metrics such as recall, precision, F1 score, and accuracy.
