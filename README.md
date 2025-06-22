@@ -51,8 +51,8 @@ All endpoints return JSON responses for seamless frontend integration.
 - **index.html**: Displays a list of all loan applications stored in the database.
 - **create.html**: Provides a form for submitting a new loan application.
 - **accuracy.html**: This page show accuracy ,precision , f1_score , recall.
-- **Dataissue.html**: Show  some of the problem in dataset  and how we  soliving it .
-- **expolety.html**: This page explain the data and some features in data and relationship between columns.
+- **data-issue.html**: Show  some of the problem in dataset  and how we  soliving it .
+- **eda.html**: This page explain the data and some features in data and relationship between columns.
 
 ## Model Training
 - Reads the loan prediction dataset from a CSV file.
